@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'aggregator/main.css' %}">
+    {% if title %}
+        <title>{{ title }} | Husker Haus</title>
+    {% else %}
+        <title>Husker Haus</title>
+    {% endif %}
+</head>
+<body>
+    <center>
+      <table border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f5f1e7">
+        <tbody>
+
+          <!-- Header -->
+          <tr>
+            <td bgcolor="#d00000">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
+                <tbody>
+                  <tr>
+                    <td style="width:18px;padding-right:4px">
+                      <a href="{% url 'site-home' %}">H</a>
+                    </td>
+                    <td style="line-height:12pt; height:10px;">
+                      <span>
+                        <b>
+                          <a href="{% url 'site-home' %}">Husker Haus</a>
+                        </b>
+                        <a href="{% url 'site-about' %}">about</a>
+                         | 
+                        <a href="#">submit</a>
+                      </span>
+                    </td>
+                    <td style="text-align:right;padding-right:4px;">
+                      <span>
+                        <a href="#">login</a>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Spacer -->
+          <tr title style="height:10px"></tr>
+
+          <!-- Content -->
+          <tr>
+            <td>
+              <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                  {% block content %}{% endblock %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+</body>
+</html>

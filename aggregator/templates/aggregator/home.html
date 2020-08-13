@@ -1,0 +1,22 @@
+{% extends "aggregator/base.html" %}
+{% block content %}
+    {% for post in posts %}
+      <tr>
+        <td>
+          {{ post.title }}
+          <span>(<a href="#">{{ post.url }})</a></span>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <span>
+            by <a href="#">{{ post.author }}</a> on
+          </span>
+          <span>{{ post.date_posted }}</span>
+            |
+          <a href="#">comments</a>
+        </td>
+      </tr>
+    {% endfor %}
+{% endblock content %}
