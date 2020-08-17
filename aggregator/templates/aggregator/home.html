@@ -13,9 +13,8 @@
         <td colspan="2"></td>
         <td class="byline">
           <span>
-            by <a class="content-link" href="#">{{ post.author }}</a> on
-          </span>
-          <span>{{ post.date_posted }}</span>
+            by <a class="content-link" href="#">{{ post.author }}</a>        </span>
+          <span>{{ post.date_posted|timesince }}</span> ago
             |
           <a class="content-link" href="#">comments</a>
         </td>
