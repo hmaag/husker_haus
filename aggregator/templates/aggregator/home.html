@@ -2,21 +2,24 @@
 {% block content %}
     {% for post in posts %}
       <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
         <td>
           {{ post.title }}
-          <span>(<a href="#">{{ post.url }})</a></span>
+          <span>(<a class="content-link" href="#">{{ post.url }})</a></span>
         </td>
       </tr>
       <tr>
-        <td></td>
-        <td>
+        <td colspan="2"></td>
+        <td class="byline">
           <span>
-            by <a href="#">{{ post.author }}</a> on
+            by <a class="content-link" href="#">{{ post.author }}</a> on
           </span>
           <span>{{ post.date_posted }}</span>
             |
-          <a href="#">comments</a>
+          <a class="content-link" href="#">comments</a>
         </td>
       </tr>
+      <tr style="height:5px"></tr>
     {% endfor %}
 {% endblock content %}
