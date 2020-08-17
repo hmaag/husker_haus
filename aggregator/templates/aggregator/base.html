@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'aggregator/main.css' %}">
+    <link rel = "icon" href = "{% static 'aggregator/huskerhaus.ico' %}" type = "image/x-icon"> 
     {% if title %}
         <title>{{ title }} | Husker Haus</title>
     {% else %}
@@ -21,7 +22,7 @@
                 <tbody>
                   <tr>
                     <td style="width:18px;padding-right:4px">
-                      <a class="nav-link" href="{% url 'site-home' %}">HH</a>
+                      <a class="nav-link" href="{% url 'site-home' %}"><img src="{% static 'aggregator/huskerhaus.ico' %}" width="18" height="18" style="margin-top: 2px" alt="Husker Haus"></a>
                     </td>
                     <td style="line-height:12pt; height:10px;">
                       <span>
