@@ -1,0 +1,15 @@
+{% extends "aggregator/base.html" %}
+{% block content %}
+
+    <div style="padding-left: 10px;">
+        <form method="POST">
+            {% csrf_token %}
+            <b>Log In</b>
+            {{ form.as_p }}
+            <div>
+                <button>Login</button>
+            </div>
+        </form>
+    </div>
+    <tr style="height:5px"></tr>
+{% endblock content %}
