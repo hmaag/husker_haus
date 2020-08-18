@@ -1,15 +1,28 @@
 {% extends "aggregator/base.html" %}
 {% block content %}
-
-    <div style="padding-left: 10px;">
-        <form method="POST">
-            {% csrf_token %}
-            <b>Log In</b>
-            {{ form.as_p }}
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    </div>
+    {% if messages %}
+        <tr>
+            {% for message in messages %}
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ message }}</td>
+            <tr style="height:5px"></tr>
+            {% endfor %}
+        </tr>
+        <tr style="height:5px"></tr>
+    {% endif %}
+    <tr>
+        <td class="content-text">
+            <form method="POST">
+                {% csrf_token %}
+                <b>Log In</b>
+                {{ form.as_p }}
+                <div>
+                    <button>Login</button>
+                </div>
+            </form>
+        </td>
+    </tr>
     <tr style="height:5px"></tr>
+    
 {% endblock content %}

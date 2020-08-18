@@ -48,6 +48,10 @@ a .nav-link:hover {
     font-weight: 500;
 }
 
+.content-text {
+    padding-left: 10px;
+}
+
 .content-section {
     background: #f5f1e7;
     padding: 10px 20px;

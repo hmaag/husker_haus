@@ -1,5 +1,52 @@
 {% extends "aggregator/base.html" %}
 {% block content %}
-    <p style="padding-left: 10px;">{{ user.username }}</p>
+    {% if messages %}
+        <tr>
+            {% for message in messages %}
+            <td class="content-text bg-gray" style="color:#d00000;">{{ message }}</td>
+            <tr style="height:5px"></tr>
+            {% endfor %}
+        </tr>
+        <tr style="height:5px"></tr>
+    {% endif %}
+    {% if not user.email %}
+        <tr>
+            <td class="content-text bg-gray">Please enter a valid email address in the email field, otherwise we can't send you a new password if you forget yours. We will not share this email with anyone.</td>
+        </tr>
+        <tr style="height:5px"></tr>
+    {% endif %}
+    <tr>
+        <td>
+            <table border="0" class="content-text">
+                <tbody>
+                    <tr>
+                        <td>user:</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>created:</td>
+                        <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                    </tr>
+                    <tr>
+                        <td>about:</td>
+                        <td>{{ user.profile.about }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="content-text">
+            <form method="POST">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <div>
+                    <button>update</button>
+                </div>
+            </form>
+        </td>    
+    </tr>
+    
     <tr style="height:5px"></tr>
 {% endblock content %}

@@ -1,13 +1,5 @@
 {% extends "aggregator/base.html" %}
 {% block content %}
-    {% if messages %}
-      {% for message in messages %}
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>{{ message }}</td>
-        <tr style="height:5px"></tr>
-      {% endfor %}
-    {% endif %}
     {% for post in posts %}
       <tr>
         <td>&nbsp;</td>
