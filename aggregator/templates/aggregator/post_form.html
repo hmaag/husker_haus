@@ -1,13 +1,11 @@
 {% extends "aggregator/base.html" %}
 {% block content %}
-
     <div class="content-text">
         <form method="POST">
             {% csrf_token %}
-            <b>Create Account</b>
             {{ form.as_p }}
             <div>
-                <button>sign up</button>
+                <button>submit</button>
             </div>
         </form>
     </div>

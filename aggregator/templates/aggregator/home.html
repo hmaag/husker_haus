@@ -1,12 +1,13 @@
 {% extends "aggregator/base.html" %}
+{% load url_shortener %}
 {% block content %}
     {% for post in posts %}
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>
-          {{ post.title }}
-          <span>(<a class="content-link" href="#">{{ post.url }})</a></span>
+          <a class="content-link" style="color:black;" href="{{ post.url }}">{{ post.title }}</a>
+          <span style="font-size: 10pt;">(<a class="content-link" href="#">{{ post.url|url_shortener }})</a></span>
         </td>
       </tr>
       <tr>
@@ -16,7 +17,7 @@
             by <a class="content-link" href="#">{{ post.author }}</a>        </span>
           <span>{{ post.date_posted|timesince }}</span> ago
             |
-          <a class="content-link" href="#">comments</a>
+          <a class="content-link" href="{% url 'post-detail' post.id %}">comments</a>
         </td>
       </tr>
       <tr style="height:5px"></tr>
