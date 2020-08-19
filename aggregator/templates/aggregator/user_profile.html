@@ -1,0 +1,24 @@
+{% extends "aggregator/base.html" %}
+{% block content %}
+    <tr>
+        <td>
+            <table border="0" class="content-text">
+                <tbody>
+                    <tr>
+                        <td>user:</td>
+                        <td>{{ username }}</td>
+                    </tr>
+                    <tr>
+                        <td>created:</td>
+                        <td>{{ created|date:"M d, Y" }}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>about:</td>
+                        <td>{{ about }}</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr style="height:5px"></tr>
+{% endblock content %}

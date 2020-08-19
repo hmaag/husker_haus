@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from .models import Post
 from .forms import CreateForm
@@ -16,6 +17,17 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 30
+
+def UserProfileView(request, **kwargs):
+    model = User
+    username = kwargs.get('username')
+    user = User.objects.filter(username=username).first()
+    created = user.date_joined
+    context = {
+        'username': username,
+        'created': created,
+    }
+    return render(request, 'aggregator/user_profile.html', context)
 
 class PostDetailView(DetailView):
     model = Post

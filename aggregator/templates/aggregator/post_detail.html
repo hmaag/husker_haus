@@ -12,7 +12,7 @@
     <tr>
         <td colspan="2"></td>
         <td class="byline">
-            <span>by <a class="content-link" href="#">{{ object.author }}</a></span>
+            <span>by <a class="content-link" href="{% url 'user-profile' object.author.username %}">{{ object.author }}</a></span>
             
             <span>{{ object.date_posted|timesince }}</span> ago
             |

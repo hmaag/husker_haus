@@ -14,7 +14,7 @@
         <td colspan="2"></td>
         <td class="byline">
           <span>
-            by <a class="content-link" href="#">{{ post.author }}</a>        </span>
+            by <a class="content-link" href="{% url 'user-profile' post.author.username %}">{{ post.author }}</a>        </span>
           <span>{{ post.date_posted|timesince }}</span> ago
             |
           <a class="content-link" href="{% url 'post-detail' post.id %}">comments</a>
