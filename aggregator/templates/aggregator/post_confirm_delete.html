@@ -1,0 +1,14 @@
+{% extends "aggregator/base.html" %}
+{% block content %}
+    <div class="content-text">
+        <form method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete the post "{{ object.title }}"</p>
+            <div>
+                <button>delete</button>
+                <a class="content-link" href="{% url 'post-detail' object.id %}">cancel</a>
+            </div>
+        </form>
+    </div>
+    <tr style="height:5px"></tr>
+{% endblock content %}

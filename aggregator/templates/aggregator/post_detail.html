@@ -6,17 +6,22 @@
         <td>&nbsp;</td>
         <td>
             <a class="content-link" style="color:black;" href="{{ object.url }}">{{ object.title }}</a>
-            <span style="font-size: 10pt;">(<a class="content-link" href="#">{{ object.url|url_shortener }})</a></span>
+            <span style="font-size: 10pt;"><a class="content-link" href="{{ post.url|url_shortener }}">({{ object.url|url_shortener }})</a></span>
         </td>
     </tr>
     <tr>
         <td colspan="2"></td>
         <td class="byline">
-            <span>
-            by <a class="content-link" href="#">{{ object.author }}</a>        </span>
+            <span>by <a class="content-link" href="#">{{ object.author }}</a></span>
+            
             <span>{{ object.date_posted|timesince }}</span> ago
             |
             <a class="content-link" href="{% url 'post-detail' post.id %}">comments</a>
+
+            {% if object.author == user %}
+            |
+            <a class="content-link" href="{% url 'post-delete' object.id %}">delete</a>
+            {% endif %}
         </td>
     </tr>
     <tr style="height:5px"></tr>

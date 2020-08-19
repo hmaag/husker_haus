@@ -7,7 +7,7 @@
         <td>&nbsp;</td>
         <td>
           <a class="content-link" style="color:black;" href="{{ post.url }}">{{ post.title }}</a>
-          <span style="font-size: 10pt;">(<a class="content-link" href="#">{{ post.url|url_shortener }})</a></span>
+          <span style="font-size: 10pt;"><a class="content-link" href="{{ post.url|url_shortener }}">({{ post.url|url_shortener }})</a></span>
         </td>
       </tr>
       <tr>
