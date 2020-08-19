@@ -15,6 +15,7 @@ class PostListView(ListView):
     template_name = 'aggregator/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 30
 
 class PostDetailView(DetailView):
     model = Post

@@ -22,4 +22,15 @@
       </tr>
       <tr style="height:5px"></tr>
     {% endfor %}
+      <tr>
+        <td colspan="2"></td>
+        <td>
+          {% if is_paginated %}
+            {% if page_obj.has_next %}
+              <a class="content-link" href="?page={{ page_obj.next_page_number }}">more</a>
+            {% endif %}
+          {% endif %}
+        </td>
+      </tr>
+      <tr style="height:5px"></tr>
 {% endblock content %}
