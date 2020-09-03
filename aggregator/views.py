@@ -29,17 +29,14 @@ def UserProfileView(request, **kwargs):
     }
     return render(request, 'aggregator/user_profile.html', context)
 
-def PostView(request, **kwargs):
-    model = Post
-    post = kwargs.get('post')
-    comments = Comment.objects.filter(post=post)
-    context = {
-        'posts': post
-    }
-    return render(request, 'aggregator/post_detail.html', context)
-
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comments = Comment.objects.filter(post=self.get_object())
+        context['comments'] = comments
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post

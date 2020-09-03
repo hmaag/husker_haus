@@ -24,5 +24,12 @@
             {% endif %}
         </td>
     </tr>
+    <tr>
+        <td>
+            {% for comment in comments %}
+            <span>{{ comment.content }}</span>
+            {% endfor %}
+        </td>
+    </tr>
     <tr style="height:5px"></tr>
 {% endblock content %}
