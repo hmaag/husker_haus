@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
-from .models import Post
+from .models import Post, Comment
 from .forms import CreateForm
 
 def home(request):
@@ -28,6 +28,15 @@ def UserProfileView(request, **kwargs):
         'created': created,
     }
     return render(request, 'aggregator/user_profile.html', context)
+
+def PostView(request, **kwargs):
+    model = Post
+    post = kwargs.get('post')
+    comments = Comment.objects.filter(post=post)
+    context = {
+        'posts': post
+    }
+    return render(request, 'aggregator/post_detail.html', context)
 
 class PostDetailView(DetailView):
     model = Post

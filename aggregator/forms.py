@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Post
+from .models import Post, Comment
 from urllib.parse import urlparse
 
 class CreateForm(ModelForm):
@@ -12,7 +12,7 @@ class CreateForm(ModelForm):
         model = Post
         fields = ['title', 'url']
 
-    # def clean(self):
-    #     parsed = urlparse(self.cleaned_data['url'])
-    #     shortend = parsed.scheme + "://" + parsed.netloc
-    #     self.cleaned_data['url'] = shortend
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

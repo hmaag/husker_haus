@@ -14,3 +14,13 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+class Comment(models.Model):
+    # come back and set the defaults -> probably should be CASCADE
+    post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    content = models.TextField() # do we need a max_length?
+    date_commented = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return '{}-{}'.format(self.post.title, str(self.user))
