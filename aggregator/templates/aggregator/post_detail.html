@@ -24,11 +24,44 @@
             {% endif %}
         </td>
     </tr>
+    <tr style="height:15px"></tr>
     <tr>
+        <td colspan="2"></td>
         <td>
-            {% for comment in comments %}
-            <span>{{ comment.content }}</span>
-            {% endfor %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <button>add comment</button>
+                </div>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="byline">
+                            {{ comments.count }} comment{{ comments|pluralize }}
+                        </td>
+                    </tr>
+                    {% for comment in comments %}
+                    <tr></tr>
+                    <tr>
+                        <td><span>{{ comment.content }}</span></td>
+                        <td class="byline">
+                            <span><a class="content-link" href="{% url 'user-profile' object.author.username %}">({{ comment.user }})</a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
         </td>
     </tr>
     <tr style="height:5px"></tr>

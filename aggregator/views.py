@@ -1,9 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, FormView
+from django import forms
+from django.http import HttpResponseForbidden
+from django.urls import reverse
+from django.views.generic.detail import SingleObjectMixin
 from .models import Post, Comment
-from .forms import CreateForm
+from .forms import CreateForm, CommentForm
 
 def home(request):
     context = {
@@ -29,6 +34,9 @@ def UserProfileView(request, **kwargs):
     }
     return render(request, 'aggregator/user_profile.html', context)
 
+class PostDetailForm(CommentForm):
+    content = CommentForm
+
 class PostDetailView(DetailView):
     model = Post
 
@@ -36,7 +44,37 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         comments = Comment.objects.filter(post=self.get_object())
         context['comments'] = comments
+        context['form'] = PostDetailForm()
         return context
+
+class PostCommentForm(SingleObjectMixin, FormView):
+    template_name = 'aggregator/post_detail.html'
+    form_class = PostDetailForm
+    model = Post
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        content = form.cleaned_data.get('content')
+        comment = Comment(post=self.get_object(), user=self.request.user, content=content)
+        comment.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post-detail', kwargs={'pk': self.object.pk})
+
+class PostDetail(View):
+    def get(self, request, *args, **kwargs):
+        view = PostDetailView.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = PostCommentForm.as_view()
+        return view(request, *args, **kwargs)
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
