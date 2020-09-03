@@ -19,6 +19,7 @@ class Comment(models.Model):
     # come back and set the defaults -> probably should be CASCADE
     post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    reply = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.SET_NULL) # recursive relationship here
     content = models.TextField() # do we need a max_length?
     date_commented = models.DateTimeField(default=timezone.now)
 

@@ -34,10 +34,12 @@ def UserProfileView(request, **kwargs):
     }
     return render(request, 'aggregator/user_profile.html', context)
 
-class PostDetailForm(CommentForm):
+### ------ Post Detail Begin ------- ###
+
+class PostDetailForm(CommentForm): # form we want to render
     content = CommentForm
 
-class PostDetailView(DetailView):
+class PostDetailView(DetailView): # detailed view of the post itself
     model = Post
 
     def get_context_data(self, **kwargs):
@@ -47,7 +49,7 @@ class PostDetailView(DetailView):
         context['form'] = PostDetailForm()
         return context
 
-class PostCommentForm(SingleObjectMixin, FormView):
+class PostCommentForm(SingleObjectMixin, FormView): # need to know how to handle the form
     template_name = 'aggregator/post_detail.html'
     form_class = PostDetailForm
     model = Post
@@ -67,7 +69,7 @@ class PostCommentForm(SingleObjectMixin, FormView):
     def get_success_url(self):
         return reverse('post-detail', kwargs={'pk': self.object.pk})
 
-class PostDetail(View):
+class PostDetail(View): # make render determination on GET/POST
     def get(self, request, *args, **kwargs):
         view = PostDetailView.as_view()
         return view(request, *args, **kwargs)
@@ -75,6 +77,8 @@ class PostDetail(View):
     def post(self, request, *args, **kwargs):
         view = PostCommentForm.as_view()
         return view(request, *args, **kwargs)
+
+### ------ Post Detail End ------- ###
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
