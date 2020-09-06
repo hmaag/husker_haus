@@ -27,6 +27,12 @@ td .byline {
     text-decoration: none;
 }
 
+.content-link-comment {
+    color: #444444;
+    text-decoration: none;
+    font-size: 9.5pt;
+}
+
 .nav-link {
     color: #fefdfa;
     text-decoration: none;
