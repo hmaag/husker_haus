@@ -19,6 +19,9 @@
                 {{ form.as_p }}
                 <div>
                     <button>login</button>
+                    <small>
+                        <a class="content-link" href="{% url 'password_reset' %}">forgot password</a>
+                    </small>
                 </div>
             </form>
         </td>
