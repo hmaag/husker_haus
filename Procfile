@@ -1,0 +1,1 @@
+web: gunicorn husker_haus.wsgi
